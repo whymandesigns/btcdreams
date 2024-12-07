@@ -1,0 +1,27 @@
+[
+    {
+      "name": "Tesla Model 3",
+      "price": 0.03,
+      "image": "https://via.placeholder.com/300x200?text=Tesla+Model+3"
+    },
+    {
+      "name": "Rolex Submariner",
+      "price": 0.05,
+      "image": "https://via.placeholder.com/300x200?text=Rolex+Submariner"
+    },
+    {
+      "name": "MacBook Pro",
+      "price": 0.02,
+      "image": "https://via.placeholder.com/300x200?text=MacBook+Pro"
+    },
+    {
+      "name": "Louis Vuitton Bag",
+      "price": 0.01,
+      "image": "https://via.placeholder.com/300x200?text=Louis+Vuitton+Bag"
+    },
+    {
+      "name": "Gaming PC",
+      "price": 0.015,
+      "image": "https://via.placeholder.com/300x200?text=Gaming+PC"
+    }
+  ]
