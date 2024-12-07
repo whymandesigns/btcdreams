@@ -1,16 +1,15 @@
 // Fetch Live Bitcoin Price
 const btcPriceSpan = document.getElementById("btc-price");
-const itemGrid = document.getElementById("item-grid");
+const itemDisplay = document.getElementById("item-display");
+const shuffleButton = document.getElementById("shuffle-button");
 
 let btcPrice = 0;
-
-// List of luxury items
-const items = [
-  { name: "Tesla Model 3", price: 0.03, image: "https://via.placeholder.com/300x200?text=Tesla+Model+3" },
-  { name: "Rolex Submariner", price: 0.05, image: "https://via.placeholder.com/300x200?text=Rolex+Submariner" },
-  { name: "MacBook Pro", price: 0.02, image: "https://via.placeholder.com/300x200?text=MacBook+Pro" },
-  { name: "Louis Vuitton Bag", price: 0.01, image: "https://via.placeholder.com/300x200?text=Louis+Vuitton+Bag" },
-  { name: "First-Class Flight", price: 0.04, image: "https://via.placeholder.com/300x200?text=First-Class+Flight" },
+let items = [
+  { name: "Tesla Model 3", price: 0.03 },
+  { name: "MacBook Pro", price: 0.02 },
+  { name: "Rolex Submariner", price: 0.05 },
+  { name: "Flight to Paris", price: 0.01 },
+  { name: "Gaming PC", price: 0.015 }
 ];
 
 // Fetch BTC price from a public API
@@ -20,29 +19,30 @@ async function fetchBitcoinPrice() {
     const data = await response.json();
     btcPrice = data.bpi.USD.rate_float;
     btcPriceSpan.textContent = `$${btcPrice.toFixed(2)}`;
-    displayItems();
+    displayItem();
   } catch (error) {
     console.error("Error fetching Bitcoin price:", error);
     btcPriceSpan.textContent = "Error fetching price";
   }
 }
 
-// Display items as cards
-function displayItems() {
-  itemGrid.innerHTML = ""; // Clear existing items
-  items.forEach((item) => {
-    const itemPriceUSD = (item.price * btcPrice).toFixed(2);
-    const itemCard = `
-      <div class="item-card">
-        <img src="${item.image}" alt="${item.name}">
-        <h2>${item.name}</h2>
-        <p>${item.price} BTC</p>
-        <p>~$${itemPriceUSD}</p>
-      </div>
-    `;
-    itemGrid.innerHTML += itemCard;
-  });
+// Display a random item
+function displayItem() {
+  if (items.length === 0) {
+    itemDisplay.textContent = "No items to display!";
+    return;
+  }
+
+  const randomItem = items[Math.floor(Math.random() * items.length)];
+  const itemPriceUSD = (randomItem.price * btcPrice).toFixed(2);
+  itemDisplay.innerHTML = `
+    <h2>${randomItem.name}</h2>
+    <p>Price: ${randomItem.price} BTC (~$${itemPriceUSD})</p>
+  `;
 }
+
+// Shuffle to next item
+shuffleButton.addEventListener("click", displayItem);
 
 // Initial fetch
 fetchBitcoinPrice();
